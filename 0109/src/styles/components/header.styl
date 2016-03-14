@@ -1,0 +1,44 @@
+@import "../variable"
+@import "../helper"
+
+.header
+    background-color $header-bg-color
+    flex-design()
+    justify-content space-around
+    align-items center
+    height 5rem
+    &__icon
+        margin-left 1rem
+        flex-design()
+        img
+            width 14rem
+            height 3rem
+    &__right
+        margin-right 1rem
+        flex-design()
+        flex-direction row
+        justify-content flex-end
+        .search__icon
+            flex-design()
+            flex-center()
+            padding 0 1rem
+            i
+                padding .6rem
+                background-color #fff
+                color #333
+                border-top-left-radius 1rem
+                border-bottom-left-radius 1rem
+            input
+                border none
+                padding .54rem
+                height 1rem
+                border-top-right-radius 1rem
+                border-bottom-right-radius 1rem
+                &:focus
+                    outline none
+        .header__login
+            padding 0 1rem
+            color #fff
+            display flex
+            flex-center()
+            flex-direction row
