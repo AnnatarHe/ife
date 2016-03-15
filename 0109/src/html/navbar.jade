@@ -1,4 +1,55 @@
 //
    Created by Annatar on 2016/3/14.
 nav.navbar
-    h2 navbar
+    .navbar__info
+        .info__user
+            .avatar
+            span.name frontendless
+        .info__data
+            .collections.data
+                span.number 110
+                span.desc 收藏
+            .followers.data
+                span.number 313
+                span.desc 粉丝
+    .navbar__controllers
+        ul.list-unstyled.controls.list
+            li.root-list.active
+                i.fa.fa-cog.fa-lg.active
+                span.active 个人报表
+                ul.list-unstyled.list
+                    li
+                        i.fa.fa-angle-right.fa-lg
+                        i.fa.fa-folder.fa-lg
+                        span 文件一
+                    li.nest
+                        i.fa.fa-angle-right.fa-lg.active
+                        i.fa.fa-folder.fa-lg.active
+                        span.active 文件二
+                        ul.list-unstyled.list
+                            li
+                                i.fa.fa-file.fa-lg.active
+                                span.active 文档1
+                            li
+                                i.fa.fa-file.fa-lg
+                                span 文档2
+                    li
+                        i.fa.fa-angle-right.fa-lg
+                        i.fa.fa-folder.fa-lg
+                        span 文件三
+            li.root-list
+                i.fa.fa-star.fa-lg
+                span 个人收藏
+            li.root-list
+                i.fa.fa-download.fa-lg
+                span 我的分享
+            li.root-list
+                i.fa.fa-star.fa-lg
+                span 图库
+            li.root-list
+                i.fa.fa-fax.fa-lg
+                span 成长记录
+            li.root-list
+                i.fa.fa-star.fa-lg
+                span 账户信息
+

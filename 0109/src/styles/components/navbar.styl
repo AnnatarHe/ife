@@ -1,0 +1,68 @@
+@import "../variable"
+@import "../helper"
+.navbar
+    background-color $navbar-bg-color
+    display flex
+    flex-direction column
+    color $navbar-font-color
+    &__info
+        padding 1rem 2rem
+        flex-design()
+        flex-direction column
+        flex-center()
+        .info__user
+            flex-design()
+            flex-direction row
+            flex-center()
+            .avatar
+                margin 1rem 0
+                display flex
+                width 2rem
+                height 2rem
+                border-radius 100%
+                position relative
+                top 0rem
+                left 0rem
+                background-color $navbar-name-color
+                &:after
+                    content ''
+                    display block
+                    width 3rem
+                    height 3rem
+                    position absolute
+                    top -.5rem
+                    left -.5rem
+                    background-color rgba(255, 255, 255, 0)
+                    border 1px solid $navbar-name-color
+                    border-radius 100%
+            .name
+                display flex
+                padding-left 2rem
+                color $navbar-name-color
+        .info__data
+            padding 1rem 0
+            flex-design()
+            .data
+                flex-design()
+                flex-direction column
+                padding 0 1rem
+            .collections
+                border-right 1px solid $navbar-name-color
+
+    &__controllers
+        i.fa
+            padding-right .5rem
+        .controls
+            padding-left 0
+            li
+                padding 1rem 0
+                &.root-list
+                    padding-left 2rem
+                &.nest
+                    padding 0
+                &.active
+                    background-color $navbar-bg-color-active
+            i.active, span.active
+                color $navbar-name-color
+
+
