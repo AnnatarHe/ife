@@ -1,0 +1,28 @@
+@import "../helper.styl"
+@import "../variable.styl"
+
+.content__body--time
+    flex-design()
+    flex-center()
+    .time__item
+        flex-design()
+        flex-direction column
+        flex-center()
+        background-color #fff
+        box-shadow 0 0 .5rem #888
+        height 5rem
+        margin 0 .4rem
+        &.time--left, &.time--right
+            color $content-bg-color
+    .time--content
+        flex 2
+        &.active
+            border-top 3px solid $header-bg-color
+        i.fa.fa-rmb
+            color $content-bg-color
+        i.fa.fa-calendar-check-o
+            color $header-bg-color
+        .money__number
+            font-size 1.2rem
+            color #ED6907
+

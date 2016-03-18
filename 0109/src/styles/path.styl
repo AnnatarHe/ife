@@ -1,0 +1,15 @@
+@import "./variable"
+.path
+    &__item
+        padding .5rem .2rem
+        color $content-nav-font-color
+        &:before
+            content '/'
+            padding-right .3rem
+        &:first-child
+            padding-left 1rem
+            &:before
+                content ''
+                padding-right 0
+        &.active
+            color $content-nav-font-color-active

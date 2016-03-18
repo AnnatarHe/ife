@@ -1,0 +1,38 @@
+//
+   Created by Annatar on 2016/3/17.
+.search__item
+    span.title 查询项
+    select.search__select
+        option(name="1", selected="selected") 第一项
+.search__item
+    .sales.column
+        .buyer.column__item.relative
+            span.title 买方
+            select.search__select.select--width
+                option(name="1", selected="selected", value='小A') 小A
+            .change
+        .saler.column__item
+            span.title 卖方
+            select.search__select.select--width
+                option(name="1", selected="selected", value='小C') 小C
+.search__item.search__item--many
+    .column
+        .column__item.line
+            .search--date
+                span.title 日期
+                input(type='date', value='2016-04-01')
+            .search--time
+                span.title 总耗时
+                select.search__select
+                    option(name='1', selected='selected', value='8天') 8天
+        .column__item.line
+            .search--time
+                span.title 人数
+                select.search__select
+                    option(name='1', selected='selected', value='10人') 10人
+            .search--date
+                span.title 成交项
+                select.search__select.select--width
+                    option(name="1", selected="selected", value='10项') 10项
+ .search__item.search__item--post
+     button.button.button--search 搜索

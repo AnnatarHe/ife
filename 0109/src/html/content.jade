@@ -1,4 +1,19 @@
 //
    Created by Annatar on 2016/3/14.
-.section.content
-    h2 content
+section.content
+    .content__path.path
+        .content__path__item.path__item C站
+        .content__path__item.path__item 个人报表
+        .content__path__item.path__item 文件一
+        .content__path__item.path__item.active 文档一
+    .content__body
+        .card.content__body--search
+            include ./_search
+        .card.content__body--time
+            include ./_time
+        .card.content__body--month
+            include ./_month
+        .card.content__body--projects
+            include ./_projects
+        .card.content__body--others
+            include ./_others

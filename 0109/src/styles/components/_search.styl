@@ -1,0 +1,40 @@
+@import "../variable"
+@import "../helper"
+
+.content__body--search
+    .search__item
+        flex-design()
+        .title
+            padding-right .5rem
+            color $content-nav-font-color
+        .search__select
+            height 1.7rem
+            width 5rem
+        .column
+            flex-design()
+            flex-direction column
+            &__item
+                display flex
+                padding-bottom 1rem
+        .relative
+            position relative
+        .change
+            position absolute
+            top 1rem
+            right 0
+            background-image url('./change.png')
+            width 1.5rem
+            height 2rem
+            background-size contain
+            @media screen and (min-width 768px)
+                right 2rem
+        &--post
+            flex-center()
+        &--many
+            flex 2
+            .column__item.line
+                flex-direction row
+                div
+                    &:last-child
+                        padding-left 1rem
+

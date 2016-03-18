@@ -1,0 +1,19 @@
+@import "../variable"
+@import "../helper"
+
+@require './_path'
+@require './_search'
+@require './_time'
+@require './_month'
+@require './_projects'
+@require './_others'
+
+
+.content
+    flex-design()
+    flex-direction column
+    &__body
+        display flex
+        flex-direction column
+        background-color $content-bg-color
+        padding 1rem 2rem
