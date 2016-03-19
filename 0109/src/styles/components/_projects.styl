@@ -1,0 +1,70 @@
+@import "../variable.styl"
+@import "../helper.styl"
+$darken-grey = darken($content-bg-color, 10%)
+.content__body--projects
+    flex-design()
+    flex-direction row
+    .first
+        flex 2
+    .second__body
+        flex-design()
+        flex-direction column
+        .heading
+            color $darken-grey
+            padding-bottom .3rem
+        .title
+            flex-design()
+            flex-direction column
+            padding 1rem
+            border-bottom 1px solid $darken-grey
+        .content
+            flex-design()
+            flex-direction row
+            border-bottom 1px solid $darken-grey
+            .price
+                flex-design()
+                flex-direction column
+                border-right 1px solid $darken-grey
+            .chage
+                padding-left .5rem
+                flex-design()
+                flex-direction column
+
+        .desc
+            flex-design()
+            flex-direction column
+    .second__footer
+        flex-design()
+        flex-direction row
+        .checkbox
+            flex-design()
+            align-items center
+        div.button
+            flex-design()
+            justify-content flex-end
+
+.tabs
+    &__nav
+        flex-design()
+        flex-direction row
+        .tab
+            flex-design()
+            border 1px solid darken($content-bg-color, 10%)
+            border-top-left-radius 2px
+            border-top-right-radius 2px
+            background-color $content-bg-color
+            text-align center
+            margin 0 .1rem
+            padding .3rem
+            &.active
+                border-bottom none
+                background-color #fff
+            &:first-child
+                margin-left 0
+            &:last-child
+                margin-right 0
+    &__content
+        padding 1rem
+        &--border
+            border 1px solid darken($content-bg-color, 10%)
+            border-top none

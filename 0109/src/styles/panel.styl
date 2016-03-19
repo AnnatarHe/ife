@@ -1,0 +1,35 @@
+@import "variable.styl"
+@import "helper.styl"
+
+// panel
+$panel-header-bg-color = #F1F6F9
+$panel-header-font-color = #B7C5C5
+$panel-border-color = #CED2D5
+$panel-radius = .5rem
+
+.panel
+    flex-design()
+    flex-direction column
+    margin 0 .5rem
+    border 1px solid $panel-border-color
+    border-radius $panel-radius
+    background-color #fff
+    &__heading
+        border-top-right-radius $panel-radius
+        border-top-left-radius $panel-radius
+        padding-left 1rem
+        background-color $panel-header-bg-color
+        border-bottom 1px solid $panel-border-color
+        h3
+            color $panel-header-font-color
+            margin 1rem 0
+    &__body
+        padding .5rem
+        background-color #fff
+    &__footer
+        flex-design()
+        flex-direction row
+        background-color #fff
+        border-top 1px solid $panel-header-bg-color
+        padding .5rem
+        color #888

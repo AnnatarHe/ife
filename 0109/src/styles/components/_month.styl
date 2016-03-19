@@ -1,0 +1,58 @@
+@import "../variable.styl"
+@import "../helper.styl"
+
+$green = #43B29F
+$blue = #398AC1
+$red = #CF4B36
+$yellow = #E1CD46
+
+.content__body--month
+    padding 1rem
+    display flex
+    width 100%
+    margin .6rem 0
+    flex-design()
+    flex-direction column
+    .title
+        color #333
+        margin 0
+    .datas
+        flex-design()
+        justify-content space-around
+        align-items center
+        .data
+            border 1px solid darken($content-container-bg-color, 5%)
+            padding 1rem
+            background-color #fff
+            flex-design()
+            flex-direction row
+            div.desc
+                flex-design()
+                flex-direction column
+                span.desc
+                    color $content-nav-font-color
+            .analytic
+                flex-design()
+                .content
+                    width 1rem
+                    height 3rem
+            &--green
+                border-left .2rem solid $green
+                .analytic
+                    .content
+                        background-color $green
+            &--blue
+                border-left .2rem solid $blue
+                .analytic
+                    .content
+                        background-color $blue
+            &--red
+                border-left .2rem solid $red
+                .analytic
+                    .content
+                        background-color $red
+            &--yellow
+                border-left .2rem solid $yellow
+                .analytic
+                    .content
+                        background-color $yellow
