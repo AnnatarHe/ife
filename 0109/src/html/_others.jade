@@ -4,12 +4,67 @@
     .panel__heading
         h3 日历
     .panel__body
-        h2 foo
+        .calendar
+            .actions
+                select.select
+                    option(selected='selected') 2016年
+                select.select
+                    option(selected='selected') 4月
+                select.select
+                    option(selected='selected') 标注日期
+                button.button.button--normal 返回今天
+            table.table.table--calendar
+                tr.calendar__heading
+                    td 一
+                    td 二
+                    td 三
+                    td 四
+                    td 五
+                    td 六
+                    td 日
+                tr.calendar__date
+                    td
+                    td
+                    td
+                    td
+                    td
+                        span.date__number 1
+                        span.date__desc 愚人节
+                    td.active
+                        span.date__number 2
+                        span.date__desc 廿五
+                    td
+                        span.date__number 3
+                        span.date__desc 廿六
+                each val in [0, 1, 2]
+                    tr.calendar__date
+                        td
+                            span.date__number 4
+                            span.date__desc 廿七
+                        td
+                            span.date__number 5
+                            span.date__desc 清明
+                        td
+                            span.date__number 6
+                            span.date__desc 廿九
+                        td
+                            span.date__number 7
+                            span.date__desc 三月
+                        td
+                            span.date__number 8
+                            span.date__desc 初二
+                        td
+                            span.date__number 9
+                            span.date__desc 初三
+                        td
+                            span.date__number 10
+                            span.date__desc 初四
+
 .panel.second
     .panel__heading
         h3 汽车行业品牌榜
     .panel__body
-        table.table
+        table.table.table--hover
             tr
                 td 排名
                 td 品牌
@@ -26,8 +81,8 @@
                 td 丰田
                 td
                     span 48912001
-                    .process.process--red
-                        div(style='width: 80%')
+                    .process.process--info
+                        div(style='width: 50%')
             tr
                 td 1
                 td 大众

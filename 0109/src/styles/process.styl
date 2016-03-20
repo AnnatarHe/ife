@@ -1,0 +1,19 @@
+@import "./variable"
+$process-radius = .5rem
+.process
+    height .5rem
+    width 70%
+    margin-left .5rem
+    border-radius $process-radius
+    background-color #e0e0e0
+    display inline-block
+    div
+        height .5rem
+        border-top-left-radius $process-radius
+        border-bottom-left-radius $process-radius
+    &.process--red
+        div
+            background-color #d23600
+    &.process--info
+        div
+            background-color $header-bg-color

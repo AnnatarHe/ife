@@ -8,3 +8,20 @@
             padding .5rem
             &.active
                 background-color $content-bg-color
+    &--hover
+        tr
+            &:hover
+                background-color $content-bg-color
+    &.table--calendar
+        td
+            border none
+            span
+                display block
+            span.date__number
+                color $red
+            &.active
+                background-color #fff
+                border 1px solid $yellow
+        tr.calendar__heading
+            border-top 2px solid $header-bg-color
+            border-bottom 1px solid $content-bg-color
