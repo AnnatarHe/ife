@@ -1,0 +1,138 @@
+body{
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
+p{
+	font:20px "宋体";
+	text-indent: 2em;
+}
+span,h3{
+	color: #cccccc;
+}
+header{
+	width: 100%;
+	height: 80px;
+	background-color: #666666;
+}
+.ico_baidu{
+	position: absolute;
+	top: 30px;
+	left: 60px;
+}
+nav {
+	float: right;
+	height: 80px;
+	display: inline-block;
+}
+nav ul{
+	position: relative;
+	top: 20px;
+}
+nav ul li {
+	list-style-type: disc;
+	float: left;
+	margin: 0 20px 0 0;
+	
+}
+nav ul li a{
+	color: #ffffff;
+	text-decoration: none;
+
+
+}
+.content{
+	height: auto;
+	padding:10px;
+	background-color:#cccccc;
+}
+.content-1,.content-2,.content-3,.content-4,.content-5{
+	height: auto;
+	background-color: #ffffff;
+	border-top:1px solid #cccccc; 
+	border-left:1px solid #cccccc;
+	border-right:2px solid #999999; 
+	border-bottom:2px solid #999999;
+	margin: auto;
+	padding: 20px;
+}
+.content-2,.content-3,.content-4{
+	margin-top: 10px;
+}
+.content-5{
+	margin-top: 20px;
+	margin-right: 10px;
+}
+figure{
+	border: 1px #cccccc solid;
+	width: 330px;
+	margin: 30px; 
+}
+figcaption{
+	padding:15px; 
+	text-align:center;
+	 padding-bottom:0; 
+}
+figure img{
+ padding:15px;
+}
+table{
+	
+	width: 100%;
+	border-collapse: collapse;
+}
+
+th{
+	border: 1px #cccccc solid;
+	background: #666666;
+	color: #ffffff;
+	text-align: left;
+
+}
+table tr td{
+	border: 1px #cccccc solid;
+}
+.tr_bottom{
+	background: #cccccc;
+}
+textarea{
+	width: 500px;
+	height:50px;
+}
+
+.form_text{
+	font: 20px  "宋体";
+	position: absolute;
+	left: 38%;
+	
+}
+
+.form_box{
+	position: absolute;
+	left: 50%;
+}
+form p{
+	  text-align: center;
+      color: #cccccc;
+}
+#submit{
+	background:blue;
+    border:0;
+    color:white; 
+    font:20px "微软雅黑";
+	width:96%;
+	margin:100px 2% 0 2%; 
+    border-radius:10px;
+}
+.form_content{
+	margin-top: 10px;
+	margin-bottom: 0px;
+}
+footer{
+	height: 50px;
+	background-color: #000000;
+	text-align: center;
+	font-size: 20px;
+	line-height: 50px;
+	color: #ffffff;
+}
