@@ -1,13 +1,14 @@
-html{
+body{
 	background-color: #fff;
+	margin:0;
+	padding: 0;
 }
 .main{
-	position: relative;
 	background-color: #eee;
 	padding: 20px;
 	border:1px #999 solid;
-	overflow: hidden;
 	margin: 20px;
+	overflow: auto;
 }
 .team_name{
 	position: relative;
@@ -29,13 +30,16 @@ html{
 	margin-top: 20px;
 	word-wrap:break-word;
 }
+.container{
+	position: relative;
+	margin-left: 220px;
+}
 .team_introduction{
 	border:1px #999 solid; 
 	background-color: #fff;
 	position: absolute;
-	left: 240px;
-	right: 160px;
-	white-space: pre-wrap;
+	margin-right: 140px;
+/*	white-space: pre-wrap;*/
 	text-indent: 2em;
 	line-height: 1.7em;
 	font-family: serif,"宋体";
@@ -48,12 +52,17 @@ html{
 	background-color: #fff;
 }
 .self_logo ul{
-	list-style-type: none;
-	padding: 0px;
+	margin: 0;
+	padding: 0;
 }
+ul li{
+	margin: 20px;
+	list-style-type: none;
+}
+
 .self_logo img{
 	width: 80px;
 	height: 80px;
-	float: left;
-	margin: 0 20px 20px;
+/*	float: left;*/
+/*	margin: 0 20px 20px;*/
 }

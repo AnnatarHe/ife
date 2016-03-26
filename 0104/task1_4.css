@@ -1,11 +1,18 @@
 .parent{
 	background-color: #ccc;
 	width: 400px;
-	height: 200px;
+	/*height: 200px;*/
+	min-height: 200px;
 	position: absolute;
 	left: 50%;
 	top: 50%;
 	transform: translate(-50%, -50%);
+
+}
+.parent p{
+	text-indent: 2em;
+	line-height: 1.7em;
+	padding: 20px 50px;
 }
 .round{
 	background-color: #fc0;
