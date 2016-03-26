@@ -1,0 +1,126 @@
+<!DOCTYPE>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>IFE JavaScript Task 01</title>
+  </head>
+<body>
+
+  <ul id="source">
+    <li>北京空气质量：<b>90</b></li>
+    <li>上海空气质量：<b>70</b></li>
+    <li>天津空气质量：<b>80</b></li>
+    <li>广州空气质量：<b>50</b></li>
+    <li>深圳空气质量：<b>40</b></li>
+    <li>福州空气质量：<b>32</b></li>
+    <li>成都空气质量：<b>90</b></li>
+  </ul>
+
+  <ul id="resort">
+    <!-- 
+    <li>第一名：北京空气质量：<b>90</b></li>
+    <li>第二名：北京空气质量：<b>90</b></li>
+    <li>第三名：北京空气质量：<b>90</b></li>
+     -->
+
+  </ul>
+
+  <button id="sort-btn">排序</button>
+
+<script type="text/javascript">
+/**
+ * getData方法
+ * 读取id为source的列表，获取其中城市名字及城市对应的空气质量
+ * 返回一个数组，格式见函数中示例
+ */
+function getData() {
+  /*
+  coding here
+  */
+var ul = document.getElementById("source");
+var lidate = ul.getElementsByTagName("li");    //这里就不要加documet了啊，在文档里面搜个毛线啊
+var bdate = ul.getElementsByTagName("b");
+var i = lidate.length;
+var data = [];
+var data1 = '';
+var data2 = 0;
+  for (var i = 0; i < lidate.length; i++) {
+    
+    data1 = lidate[i].innerHTML.substr(0,2);
+    data2 = parseInt(bdate[i].innerHTML);
+    data[i] = [data1,data2];
+  }
+  /*
+  data = [
+    ["北京", 90],
+    ["北京", 90]
+    ……
+  ]
+  */
+  // console.log(data);
+  return data;
+
+};
+
+/**
+ * sortAqiData
+ * 按空气质量对data进行从小到大的排序
+ * 返回一个排序后的数组
+ */
+function sortAqiData(data) {
+
+// console.log(data[1][1]);
+//   var temp;
+//   var length = data.length;
+//   for(var i = 0 ;i<length;i++){                                  //冒泡排序
+//     for(var n = 0;n<length-i ; n++){
+//     if ( data[n][1] >= data[n+1][1] ) {
+//       temp = data[n];
+//       data[n]= data[n+1];
+//       data[n+1]= temp; 
+//         }
+//      }
+//   }
+  data.sort(function(x,y){
+    return x[1]-y[1]
+  })
+  return data;
+};
+
+/**
+ * render
+ * 将排好序的城市及空气质量指数，输出显示到id位resort的列表中
+ * 格式见ul中的注释的部分
+ */
+function render(data) {
+  var length = data.length;
+  var i = 0;
+  while (i < length) {
+  var newNode = document.createElement("li");                                 //创建一个节点
+  var sort ="一二三四五六七"
+  newNode.innerHTML = '第'+sort.substr(i,1)+'名:'+data[i][0]+"空气质量:"+"<b>"+data[i][1]+"</b>";//字符串截取来进行一二三四的汉字序数
+  document.getElementById('resort').appendChild(newNode);                    //不需要加双引号
+  i++;
+  }     
+}
+
+function btnHandle() {
+  var aqiData = getData();
+  aqiData = sortAqiData(aqiData);
+  render(aqiData);
+}
+
+
+function init() {
+
+  // 在这下面给sort-btn绑定一个点击事件，点击时触发btnHandle函数
+var button = document.getElementById("sort-btn");
+button.addEventListener('click',btnHandle,false);
+
+}
+
+init();
+
+</script>
+</body>
+</html>
