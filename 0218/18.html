@@ -1,0 +1,89 @@
+<<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>基础Javascript练习</title>
+	<style type="text/css">
+		li{
+			display: inline-block;
+			background-color: red;
+			padding: 10px;
+			margin-left: 10px;
+			margin-top: 10px;
+			color: white;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<input type="text" id="show" placeholder="请输入数字"> 
+	<input type="button" value="左侧入" onclick="inleft()">
+	<input type="button" value="右侧入"onclick="inright()">
+	<input type="button" value="左侧出"onclick="outleft()">
+	<input type="button" value="右侧出" onclick="outright()">
+	<ul id="queue"></ul>
+	<script language="javascript">
+	var b1 = true;//添加替换的标志量
+	var num = document.getElementById('show');//获取文本框
+	var ul = document.getElementById('queue');//获取无序列表
+	var lis = ul.getElementsByTagName('li');//获取ul中的li
+	function inleft(){
+		var li = document.createElement('li');//创建一个li元素节点
+		if(isNum(num.value)){//判断数字的合法性
+			li.innerHTML = num.value;//将文本框中的值赋给li
+             li.onclick = function(){
+                 this.parentNode.removeChild(this)//当点击li时就移除
+             }
+            if(lis){//判断是否存在元素节点li
+            	ul.insertBefore(li, lis[0]);//如果存在就添加到第一个位置
+            }
+            else{
+            	ul.appendChild(li);//如果不存在将元素li添加到ul中
+            }
+        }
+        else{
+        	alert("请重新输入数字！");
+        }
+ 
+ 
+    }
+    function inright(){
+    	var li = document.createElement('li');
+    	if(isNum(num.value)){
+    		li.innerHTML = num.value;
+    		li.onclick = function(){
+    			li.parentNode.removeChild(li);
+    		}
+    		ul.appendChild(li);
+    	}
+    	else{
+    		alert("文本框为空，请重新输入数字！");
+    	}
+    }
+ function outleft(){
+        if(lis){
+        	ul.removeChild(lis[0]);
+           
+        }
+        else{
+            alert("列表中没有要移除的数，请进行添加！");
+        }
+    }
+ function outright(){
+
+        if(lis){//判断是否有元素节点
+        	ul.removeChild(lis[lis.length-1]);//如果有元素节点将移除最后一个li  
+        }
+        else{
+            alert("列表中没有要移除的数，请进行添加！");
+        }
+    }
+    function isNum(num){
+    	var exg = /^[0-9]{1,}$/;//用正则表达式判断是否为数字
+    	return exg.test(num);
+    }
+
+
+</script>
+</body>
+</html>
