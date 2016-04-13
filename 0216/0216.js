@@ -1,3 +1,4 @@
+(function(){
 /*
  * aqiData，存储用户输入的空气指数数据
  * 示例格式：
@@ -14,9 +15,13 @@
  * 从用户输入中获取数据，向aqiData中增加一条数据
  * 然后渲染aqi-list列表，增加新增的数据
  */
- function addAqiData() {
- 	var cityTrim = city_input.value.trim();//获取用户输入的数据,关于trim???
- 	var value_trim = value_input.value.trim();//空格处理在trim()中
+ function mytrim(str){
+  return str.replace(/[\s(^\s+)(\s+$)]/g, "");//改写的trim()
+  // this.replace("\s+","");用于去除内部空格
+};
+function addAqiData() {
+ 	var cityTrim = mytrim(city_input.value);//获取用户输入的数据,关于trim???
+ 	var value_trim = mytrim(value_input.value);//空格处理在trim()中
 
  	//正则判断
  	if(!cityTrim.match(/^[A-Za-z\u4E00-\u9FA5]+$/)){
@@ -31,10 +36,7 @@
  	// console.log(aqiData);
  }
 
- String.prototype.trim = function() {
-  return this.replace(/[\s(^\s+)(\s+$)]/g, "")
-  // this.replace("\s+","");用于去除内部空格
-};
+
 /**
  * 渲染aqi-table表格
  */
@@ -94,3 +96,4 @@ function init() {
 }
 
 init();
+})()
