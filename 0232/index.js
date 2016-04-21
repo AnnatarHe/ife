@@ -3,7 +3,7 @@
 
     // 只支持chrome 49
     (function() {
-        if (navigator.userAgent.indexOf('Chrome/49') < 0) {
+        if (navigator.userAgent.indexOf('Chrome/') < 0) {
             alert('由于使用了较多的es2015特性，仅支持chrome 49，请换用现代浏览器')
             document.querySelector('body').innerHTML = '<h1 style="color: #fff">由于使用了较多的es2015特性，仅支持chrome 49，请换用现代浏览器</h1>'
 
