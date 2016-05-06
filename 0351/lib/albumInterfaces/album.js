@@ -5,10 +5,20 @@
 class AlbumInterface {
 
     /**
+     * 初始化
+     * @param  {images[]} imageDoms 图片的父dom
+     * @return {}
+     */
+    init(imageDoms) {
+        throw new Error('please implement init method')
+    }
+
+    /**
      * 追加
+     * @param {HTMLElement} image 图片的父dom
      * @return {[type]} [description]
      */
-    append() {
+    append(image) {
         throw new Error('please implement append method')
     }
 
