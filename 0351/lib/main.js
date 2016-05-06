@@ -4,12 +4,67 @@ import Barrel from './barrel/barrel'
 import Puzzle from './puzzle/puzzle'
 import Waterfall from './waterfall/waterfall'
 
+import { extend, isFullscreenEnabled } from './utils/index'
+
+/**
+ * PUZZLE: 1, // 拼图布局
+ * WATERFALL: 2, // 瀑布布局
+ * BARREL: 3 // 木桶布局
+ */
 class FelAlbum {
-    constructor() {
-        this.layout = {
-            PUZZLE: 1, // 拼图布局
-            WATERFALL: 2, // 瀑布布局
-            BARREL: 3 // 木桶布局
+    constructor(containerDom, options) {
+
+        this.setInitOptions(options)
+        this.setDefaultLayoutEngine()
+
+        this.getImageDomElements(containerDom)
+
+    }
+
+    /**
+     * @private
+     * @param {object} options 用户设置的值
+     */
+    setInitOptions(options) {
+
+        if (options && options.layout !== undefined) {
+            this.checkLayout(options.layout)
+        }
+
+        let defaultOptions = {
+            layout: 1, // 拼图布局是默认的
+            gutterX: 16, // 图片间距 X 轴
+            gutterY: 16, // 图片间距 Y 轴
+            barrelHeight: 16, // 木桶模式的高度
+            barrelBinMin: 5, // 木桶模式每行图片数量下限
+            barrelBinMax: 10 // 木桶模式每行图片数量上限
+        }
+
+        if (options) {
+            this.options = extend(defaultOptions, options)
+        }else {
+            this.options = defaultOptions
+        }
+
+    }
+
+    /**
+     * @private
+     * 设置默认渲染引擎
+     */
+    setDefaultLayoutEngine() {
+        switch (this.options.layout) {
+            case 2:
+                this.layoutEngine = new Waterfall()
+                break
+            case 3:
+                this.layoutEngine = new Barrel()
+                break
+            case 1:
+                this.layoutEngine = null
+            default:
+                this.layoutEngine = new Puzzle()
+                break
         }
     }
 
@@ -28,8 +83,8 @@ class FelAlbum {
      * 获取相册所有图像的对应DOM元素
      * @return {[type]} [description]
      */
-    getImageDomElements() {
-
+    getImageDomElements(containerDom) {
+        this.images = containerDom.querySelectorAll('.item')
     }
 
     /**
@@ -54,6 +109,34 @@ class FelAlbum {
      */
     setLayout(layout) {
 
+        if (this.checkLayout(layout)) {
+            this.options.layout = layout
+            // 触发重新渲染逻辑
+            this.layoutEngine.render()
+        }
+    }
+
+    /**
+     * @private
+     * 确认这个layout是不是合法值
+     * @param  {number} layout layout 类型
+     * @return {boolean} 成功或错误
+     */
+    checkLayout(layout) {
+
+        let _layout = ~~layout
+
+        if (_layout < 1 || _layout > 3) {
+            throw new Error(`
+                please input number like this:
+                1: puzzle layout
+                2: waterfall layout
+                3: barrel layout
+                `)
+        }
+
+        return true
+
     }
 
     /**
@@ -62,6 +145,22 @@ class FelAlbum {
      */
     getLayout() {
 
+        let layout = 0
+
+        switch (this.options.layout) {
+            case 1:
+                layout = 'Puzzle layout'
+                break
+            case 2:
+                layout = 'Waterfall layout'
+                break
+            case 3:
+                layout = 'Barrel layout'
+                break
+            default:
+                throw new Error('unknow layout engine')
+        }
+        return layout
     }
 
     /**
@@ -69,16 +168,29 @@ class FelAlbum {
      * @param {[type]} x [description]
      * @param {[type]} y [description]
      */
-    setGutter(x, y) {
+    setGutter(x = 16, y = 16) {
+
+        if (typeof x !== 'number' || typeof y !== 'number') {
+            x = parseInt(x)
+            y = parseInt(y)
+        }
+
+        this.options.gutterX = x
+        this.options.gutterY = y
+
+        this.layoutEngine.render()
 
     }
 
     /**
      * 点击图片的时候全屏浏览
+     * @param {HTMLImgElement} ele 图片DOM
      * @return {[type]} [description]
      */
-    enableFullscreen() {
-
+    enableFullscreen(ele) {
+        if (isFullscreenEnabled()) {
+            ele.requestFullscreen()
+        }
     }
 
     /**
@@ -94,8 +206,10 @@ class FelAlbum {
      * @param {[type]} min [description]
      * @param {[type]} max [description]
      */
-    setBarrelBin(min, max) {
-
+    setBarrelBin(min = 5, max = 10) {
+        // todo 检测
+        this.options.barrelBinMin = min
+        this.options.barrelBinMax = max
     }
 
     /**
@@ -103,13 +217,14 @@ class FelAlbum {
      * @return {[type]} [description]
      */
     getBarrelBinMin() {
-
+        return this.options.barrelBinMin
     }
 
     /**
      * 设置木桶模式每行高的上下限
      */
     setBarrelHeight() {
+        return this.options.barrelHeight
     }
 
     /**
@@ -117,7 +232,7 @@ class FelAlbum {
      * @return {[type]} [description]
      */
     getBarrelHeightMax() {
-
+        return this.options.barrelHeight
     }
 
     /**
@@ -125,7 +240,7 @@ class FelAlbum {
      * @return {[type]} [description]
      */
     getBarrelHeightMin() {
-
+        return this.options.barrelHeight
     }
 }
 
