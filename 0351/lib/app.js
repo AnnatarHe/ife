@@ -8,4 +8,14 @@ const $album = document.querySelector('.fel-album')
 
 const album = new Album($album)
 
-album.setLayout(1)
+document.querySelector('#puzzle').addEventListener('click', () => {
+    album.setLayout(1)
+})
+
+document.querySelector('#waterfall').addEventListener('click', () => {
+    album.setLayout(2)
+})
+
+document.querySelector('#barrel').addEventListener('click', () => {
+    album.setLayout(3)
+})
