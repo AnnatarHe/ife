@@ -3,19 +3,21 @@
 import Barrel from './barrel/barrel'
 import Puzzle from './puzzle/puzzle'
 import Waterfall from './waterfall/waterfall'
+import Fullscreen from './fullscreen/fullscreen'
 
 import { extend, isFullscreenEnabled } from './utils/index'
 
 /**
- * PUZZLE: 1, // 拼图布局
- * WATERFALL: 2, // 瀑布布局
- * BARREL: 3 // 木桶布局
+ * PUZZLE:      1         拼图布局
+ * WATERFALL:   2         瀑布布局
+ * BARREL:      3         木桶布局
+ * FULLSCREEN:  4         全屏模式
  */
 class FelAlbum {
     constructor(containerDom, options) {
 
-        this.setInitOptions(options)
-        this.setDefaultLayoutEngine()
+        this._setInitOptions(options)
+        this._setDefaultLayoutEngine()
 
         this.getImageDomElements(containerDom)
 
@@ -25,10 +27,10 @@ class FelAlbum {
      * @private
      * @param {object} options 用户设置的值
      */
-    setInitOptions(options) {
+    _setInitOptions(options) {
 
         if (options && options.layout !== undefined) {
-            this.checkLayout(options.layout)
+            this._checkLayout(options.layout)
         }
 
         let defaultOptions = {
@@ -52,13 +54,16 @@ class FelAlbum {
      * @private
      * 设置默认渲染引擎
      */
-    setDefaultLayoutEngine() {
+    _setDefaultLayoutEngine() {
         switch (this.options.layout) {
             case 2:
                 this.layoutEngine = new Waterfall()
                 break
             case 3:
                 this.layoutEngine = new Barrel()
+                break
+            case 4:
+                this.layoutEngine = new Fullscreen()
                 break
             case 1:
                 this.layoutEngine = null
@@ -109,7 +114,7 @@ class FelAlbum {
      */
     setLayout(layout) {
 
-        if (this.checkLayout(layout)) {
+        if (this._checkLayout(layout)) {
             this.options.layout = layout
             // 触发重新渲染逻辑
             this.layoutEngine.render()
@@ -122,11 +127,11 @@ class FelAlbum {
      * @param  {number} layout layout 类型
      * @return {boolean} 成功或错误
      */
-    checkLayout(layout) {
+    _checkLayout(layout) {
 
         let _layout = ~~layout
 
-        if (_layout < 1 || _layout > 3) {
+        if (_layout < 1 || _layout > 4) {
             throw new Error(`
                 please input number like this:
                 1: puzzle layout
@@ -156,6 +161,9 @@ class FelAlbum {
                 break
             case 3:
                 layout = 'Barrel layout'
+                break
+            case 4:
+                layout = 'Full screen layout'
                 break
             default:
                 throw new Error('unknow layout engine')
