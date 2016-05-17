@@ -16,10 +16,11 @@ import { extend, isFullscreenEnabled } from './utils/index'
 class FelAlbum {
     constructor(containerDom, options) {
 
-        this._setInitOptions(options)
-        this._setDefaultLayoutEngine()
-
         this.getImageDomElements(containerDom)
+        
+        this._setInitOptions(options)
+
+        this._setDefaultLayoutEngine()
 
     }
 
@@ -57,18 +58,18 @@ class FelAlbum {
     _setDefaultLayoutEngine() {
         switch (this.options.layout) {
             case 2:
-                this.layoutEngine = new Waterfall()
+                this.layoutEngine = new Waterfall(this.images)
                 break
             case 3:
-                this.layoutEngine = new Barrel()
+                this.layoutEngine = new Barrel(this.images)
                 break
             case 4:
-                this.layoutEngine = new Fullscreen()
+                this.layoutEngine = new Fullscreen(this.images)
                 break
             case 1:
                 this.layoutEngine = null
             default:
-                this.layoutEngine = new Puzzle()
+                this.layoutEngine = new Puzzle(this.images)
                 break
         }
     }

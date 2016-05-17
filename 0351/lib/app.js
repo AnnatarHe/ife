@@ -1,5 +1,5 @@
 // 入口文件
-import './app.sass'
+import './app.scss'
 
 import Album from './main'
 

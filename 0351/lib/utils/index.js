@@ -10,7 +10,7 @@ const extend = (base, higher) => {
         return false
     }
 
-    let _temp = JSON.parse(JSON.stringify(base))
+    let _temp = Object.create(base)
 
     for (let index in higher) {
         if (higher.hasOwnProperty(index)) {

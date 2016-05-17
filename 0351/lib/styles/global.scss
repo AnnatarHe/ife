@@ -1,0 +1,12 @@
+body {
+    margin: 0;
+    background-color: #40a070;
+}
+.fel-album {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    .item {
+        margin: 10px;
+    }
+}
