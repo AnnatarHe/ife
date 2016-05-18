@@ -56,6 +56,29 @@ class FelAlbum {
      * 设置默认渲染引擎
      */
     _setDefaultLayoutEngine() {
+        let rest = this.images.length
+        
+        // 当所有图片加载完成之后才能设置布局引擎
+        for (let index in this.images) {
+            if (this.images.hasOwnProperty(index)) {
+                this.images[index].querySelector('img').onload = () => {
+                    --rest
+                    // 在所有图片加载完以后调用
+                    if (rest <= 0) {
+                        this._setLayoutEngineAction()
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * 设置布局引擎
+     * 被上面的设置所调用
+     * @private
+     */
+    _setLayoutEngineAction() {
+
         switch (this.options.layout) {
             case 2:
                 this.layoutEngine = new Waterfall(this.images)

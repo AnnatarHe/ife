@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack-dev-server --process --colors --hot --inline --devtool eval",
+    "dev": "webpack-dev-server --process --colors --hot --inline",
     "build": "webpack -p --process --colors",
     "test": ""
   },
