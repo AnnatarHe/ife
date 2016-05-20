@@ -29,6 +29,10 @@ class AlbumInterface {
     render() {
         throw new Error('please implement render method')
     }
+    
+    destroy() {
+        throw  new Error('please implement destroy method')
+    }
 }
 
 export default AlbumInterface

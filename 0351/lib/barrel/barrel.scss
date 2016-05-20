@@ -1,0 +1,13 @@
+.barrel--album {
+    flex-direction: column;
+
+    .barrel--item {
+        flex: 1;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        .item {
+            flex: 1;
+        }
+    }
+}

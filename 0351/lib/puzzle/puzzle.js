@@ -3,8 +3,9 @@ import './puzzle.scss'
 import Album from '../albumInterfaces/album'
 
 class Puzzle extends Album {
-    constructor(imageDoms) {
+    constructor(imageDoms, containerDom) {
         super()
+        this.orginContainerDom = containerDom
         this.init(imageDoms)
     }
 
@@ -26,17 +27,9 @@ class Puzzle extends Album {
     }
 
     init(imageDoms) {
-        imageDoms[0].parentNode.classList.add('puzzle--album')
-        this._getImgsDom(imageDoms)
-        let rect = this.getMaxWidth()
-        // 为每一个图片强制设置宽度高度，铺满画布
-        for (let index in imageDoms) {
-            if (imageDoms.hasOwnProperty(index)) {
-                let currentDom = imageDoms[index]
-                currentDom.querySelector('img').style.height = rect.height + 'px'
-                currentDom.querySelector('img').style.width = rect.width + 'px'
-            }
-        }
+        this.imageDoms = imageDoms
+        this._getImgsDom(this.imageDoms)
+        this.render()
     }
 
     getMaxWidth() {
@@ -53,13 +46,46 @@ class Puzzle extends Album {
             height
         }
     }
+    
+    _generaterDomString() {
+        let _domStr = ''
+        for (let item of this.images) {
+            _domStr += '<div class="item">'
+            _domStr += item.parentNode.innerHTML
+            _domStr += '</div>'
+        }
+        return _domStr
+    }
 
     append(image) {
         throw new Error('please implement append method')
     }
+    
+    _resetDomHtml() {
+        let domStr = this._generaterDomString()
+        this.orginContainerDom.innerHTML = domStr
+    }
 
+    /**
+     * TODO:
+     * 再次生成的时候会造成图片宽高强制设定成0.。。。我的锅
+     */
     render() {
-        console.log('just render this dom')
+        this.orginContainerDom.classList.add('puzzle--album')
+        this._resetDomHtml()
+        let rect = this.getMaxWidth()
+        // 为每一个图片强制设置宽度高度，铺满画布
+        for (let index in this.imageDoms) {
+            if (this.imageDoms.hasOwnProperty(index)) {
+                let currentDom = this.imageDoms[index]
+                currentDom.querySelector('img').style.height = rect.height + 'px'
+                currentDom.querySelector('img').style.width = rect.width + 'px'
+            }
+        }
+    }
+    
+    destroy() {
+        this.orginContainerDom.classList.remove('puzzle--album')
     }
 }
 

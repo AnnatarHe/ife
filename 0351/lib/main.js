@@ -15,6 +15,8 @@ import { extend, isFullscreenEnabled } from './utils/index'
  */
 class FelAlbum {
     constructor(containerDom, options) {
+        
+        this.orginContainerDom = containerDom
 
         this.getImageDomElements(containerDom)
         
@@ -81,18 +83,18 @@ class FelAlbum {
 
         switch (this.options.layout) {
             case 2:
-                this.layoutEngine = new Waterfall(this.images)
+                this.layoutEngine = new Waterfall(this.images, this.orginContainerDom)
                 break
             case 3:
-                this.layoutEngine = new Barrel(this.images)
+                this.layoutEngine = new Barrel(this.images, this.orginContainerDom)
                 break
             case 4:
-                this.layoutEngine = new Fullscreen(this.images)
+                this.layoutEngine = new Fullscreen(this.images, this.orginContainerDom)
                 break
             case 1:
                 this.layoutEngine = null
             default:
-                this.layoutEngine = new Puzzle(this.images)
+                this.layoutEngine = new Puzzle(this.images, this.orginContainerDom)
                 break
         }
     }
@@ -131,15 +133,23 @@ class FelAlbum {
     removeImage(image) {
 
     }
+    
+    resetLayout(layout) {
+        this.layoutEngine.destroy()
+        
+        this.setLayout(layout)
+    }
 
     /**
      * 设置相册布局
      * @param {number} layout 初始化定义的layout 的 number
      */
     setLayout(layout) {
+        
 
         if (this._checkLayout(layout)) {
             this.options.layout = layout
+            this._setLayoutEngineAction()
             // 触发重新渲染逻辑
             this.layoutEngine.render()
         }
