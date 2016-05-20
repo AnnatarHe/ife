@@ -1,12 +1,13 @@
 // 全屏模式
 
-import './fullscreen.sass'
+import './fullscreen.scss'
 import Album from '../albumInterfaces/album'
 
 class Fullscreen extends Album {
     
     constructor(doms, containerDom) {
         super()
+        this.originContainerDom = containerDom
         this.addModalTo(document.body)
         this.init(containerDom)
     }
@@ -73,10 +74,12 @@ class Fullscreen extends Album {
     }
 
     render() {
+        this.originContainerDom.classList.add('fullscreen--album')
         // 不用处理
     }
 
     destroy() {
+        this.originContainerDom.classList.remove('fullscreen--album')
         // 不用处理
     }
 }

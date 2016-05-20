@@ -5,7 +5,7 @@ import Album from '../albumInterfaces/album'
 class Puzzle extends Album {
     constructor(imageDoms, containerDom) {
         super()
-        this.orginContainerDom = containerDom
+        this.originContainerDom = containerDom
         this.init(imageDoms)
     }
 
@@ -31,21 +31,6 @@ class Puzzle extends Album {
         this._getImgsDom(this.imageDoms)
         this.render()
     }
-
-    getMaxWidth() {
-        this.images.sort((prev, current) => {
-            return parseInt(prev.getBoundingClientRect().width) - parseInt(current.getBoundingClientRect().width) > 0 ? 0 : 1
-        })
-        let width = this.images[0].getBoundingClientRect().width
-        this.images.sort((prev, current) => {
-            return parseInt(prev.getBoundingClientRect().height) - parseInt(current.getBoundingClientRect().height) > 0 ? 0 : 1
-        })
-        let height = this.images[0].getBoundingClientRect().height
-        return {
-            width,
-            height
-        }
-    }
     
     _generaterDomString() {
         let _domStr = ''
@@ -58,34 +43,31 @@ class Puzzle extends Album {
     }
 
     append(image) {
-        throw new Error('please implement append method')
+        let fragment = document.createDocumentFragment()
+        let item = document.createElement('div')
+        item.classList.add('item')
+        item.appendChild(image)
+        fragment.appendChild(item)
+        this.originContainerDom.appendChild(fragment)
+        
+        // 用来重置宽高的
+        this.resetImagesSize(this.rememberOriginImgSize(), 'all')
     }
     
     _resetDomHtml() {
         let domStr = this._generaterDomString()
-        this.orginContainerDom.innerHTML = domStr
+        this.originContainerDom.innerHTML = domStr
     }
 
-    /**
-     * TODO:
-     * 再次生成的时候会造成图片宽高强制设定成0.。。。我的锅
-     */
     render() {
-        this.orginContainerDom.classList.add('puzzle--album')
+        this.originContainerDom.classList.add('puzzle--album')
+        let originSize = this.rememberOriginImgSize()
         this._resetDomHtml()
-        let rect = this.getMaxWidth()
-        // 为每一个图片强制设置宽度高度，铺满画布
-        for (let index in this.imageDoms) {
-            if (this.imageDoms.hasOwnProperty(index)) {
-                let currentDom = this.imageDoms[index]
-                currentDom.querySelector('img').style.height = rect.height + 'px'
-                currentDom.querySelector('img').style.width = rect.width + 'px'
-            }
-        }
+        this.resetImagesSize(originSize, 'all')
     }
     
     destroy() {
-        this.orginContainerDom.classList.remove('puzzle--album')
+        this.originContainerDom.classList.remove('puzzle--album')
     }
 }
 

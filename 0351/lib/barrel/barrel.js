@@ -6,10 +6,9 @@ class Barrel extends Album {
 
     constructor(imageDoms, containerDom, options = {}) {
         super()
-        this.orginImageDoms = imageDoms
-        this.orginContainerDom = containerDom
-        this.orginContainerDom.classList.add('barrel--album')
-        this._transDOM2Array()
+        this.originImageDoms = imageDoms
+        this.originContainerDom = containerDom
+        this.imageDoms = this._transDOM2Array(this.originImageDoms)
 
         this.options = {
 
@@ -21,18 +20,18 @@ class Barrel extends Album {
         this.init(imageDoms)
     }
     
-    _transDOM2Array() {
+    _transDOM2Array(doms) {
         let dom = []
-        for ( let index in this.orginImageDoms) {
-            if (this.orginImageDoms.hasOwnProperty(index)) {
-                dom.push(this.orginImageDoms[index])
+        for ( let index in doms) {
+            if (doms.hasOwnProperty(index)) {
+                dom.push(doms[index])
             }
         }
-        this.imageDoms = dom
+        return dom
     }
 
     init(imageDoms) {
-        let width = this.orginContainerDom.getBoundingClientRect().width
+        let width = this.originContainerDom.getBoundingClientRect().width
         this.everyWidth = width / this.options.barrelBinMin
         this.everyHeight = this.options.barrelHeight
         this.render()
@@ -49,12 +48,13 @@ class Barrel extends Album {
     parseDom() {
         let index = 0
         let parsedOneLineHtml = ''
-        while (this.imageDoms.length > 0) {
+        let domsArr = this._transDOM2Array(this.originContainerDom.querySelectorAll('.item'))
+        while (domsArr.length > 0) {
 
             parsedOneLineHtml += '<div class="barrel--item">'
-            while (index < this.options.barrelBinMin && this.imageDoms.length > 0) {
+            while (index < this.options.barrelBinMin && domsArr.length > 0) {
                 parsedOneLineHtml += '<div class="item">'
-                parsedOneLineHtml += this.imageDoms.shift().innerHTML.trim()
+                parsedOneLineHtml += domsArr.shift().innerHTML.trim()
                 parsedOneLineHtml += '</div>'
 
                 index++
@@ -66,9 +66,9 @@ class Barrel extends Album {
     }
 
     _changeImgSize() {
-        for (let index in this.orginImageDoms) {
-            if (this.orginImageDoms.hasOwnProperty(index)) {
-                let img = this.orginImageDoms[index].querySelector('img')
+        for (let index in this.originImageDoms) {
+            if (this.originImageDoms.hasOwnProperty(index)) {
+                let img = this.originImageDoms[index].querySelector('img')
                 img.style.width = this.everyWidth + 'px'
                 img.style.height = this.everyHeight + 'px'
             }
@@ -76,12 +76,14 @@ class Barrel extends Album {
     }
 
     render() {
-        this.orginContainerDom.innerHTML = this.parseDom()
-        this._changeImgSize()
+        this.originContainerDom.classList.add('barrel--album')
+        let originSize = this.rememberOriginImgSize()
+        this.originContainerDom.innerHTML = this.parseDom()
+        this.resetImagesSize(originSize, 'height')
     }
 
     destroy() {
-        this.orginContainerDom.classList.remove('barrel--album')
+        this.originContainerDom.classList.remove('barrel--album')
     }
 }
 

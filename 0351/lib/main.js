@@ -121,8 +121,8 @@ class FelAlbum {
     /**
      * 向相册添加图片
      */
-    addImage() {
-
+    append(img) {
+        this.layoutEngine.append(img)
     }
 
     /**
