@@ -36,9 +36,37 @@ class Barrel extends Album {
         this.everyHeight = this.options.barrelHeight
         this.render()
     }
+    
+    _getDivFragment(img) {
+        let item = document.createElement('div')
+        item.classList.add('item')
+        item.appendChild(img)
+        return item
+    }
+    
+    _getBarrelFragment() {
+        let barrelItem = document.createElement('div')
+        barrelItem.classList.add('barrel--item')
+        return barrelItem
+    }
 
     append(image) {
 
+        let barrels = this.originContainerDom.querySelectorAll('.barrel--item')
+        let lastBarrel = barrels[barrels.length - 1]
+
+        let lastBarrelItemLength = lastBarrel.querySelectorAll('.item').length
+        console.log(barrels)
+        console.log(lastBarrelItemLength)
+        if (lastBarrelItemLength < this.options.barrelBinMin) {
+            let item = this._getDivFragment(image)
+            lastBarrel.appendChild(item)
+        }else {
+            let barrelFragment = this._getBarrelFragment()
+            let item = this._getDivFragment(image)
+            barrelFragment.appendChild(item)
+            this.originContainerDom.appendChild(barrelFragment)
+        }
     }
 
     /**
@@ -64,22 +92,24 @@ class Barrel extends Album {
         }
         return parsedOneLineHtml
     }
-
+    
     _changeImgSize() {
-        for (let index in this.originImageDoms) {
-            if (this.originImageDoms.hasOwnProperty(index)) {
-                let img = this.originImageDoms[index].querySelector('img')
-                img.style.width = this.everyWidth + 'px'
-                img.style.height = this.everyHeight + 'px'
+        let totalWidth = this.originContainerDom.getBoundingClientRect().width
+        let perWidth = Math.ceil(totalWidth / this.options.barrelBinMin)
+        
+        let imgs = this.originContainerDom.querySelectorAll('img')
+        
+        for (let index in imgs) {
+            if (imgs.hasOwnProperty(index)) {
+                imgs[index].style.width = perWidth + 'px'
             }
         }
     }
 
     render() {
         this.originContainerDom.classList.add('barrel--album')
-        let originSize = this.rememberOriginImgSize()
         this.originContainerDom.innerHTML = this.parseDom()
-        this.resetImagesSize(originSize, 'height')
+        this._changeImgSize()
     }
 
     destroy() {

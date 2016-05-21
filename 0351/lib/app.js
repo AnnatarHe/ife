@@ -33,5 +33,5 @@ document.querySelector('#append').addEventListener('click', () => {
 
 
 function random() {
-    return Math.ceil(Math.random() * 100)
+    return Math.ceil(Math.random() * 200)
 }

@@ -68,19 +68,12 @@ class Fullscreen extends Album {
         }
     }
 
-
-    append(image) {
-        // 不用处理
-    }
-
     render() {
         this.originContainerDom.classList.add('fullscreen--album')
-        // 不用处理
     }
 
     destroy() {
         this.originContainerDom.classList.remove('fullscreen--album')
-        // 不用处理
     }
 }
 

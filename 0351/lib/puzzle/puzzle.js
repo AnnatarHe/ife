@@ -34,10 +34,14 @@ class Puzzle extends Album {
     
     _generaterDomString() {
         let _domStr = ''
-        for (let item of this.images) {
-            _domStr += '<div class="item">'
-            _domStr += item.parentNode.innerHTML
-            _domStr += '</div>'
+        let images = this.originContainerDom.querySelectorAll('img')
+        
+        for (let index in images) {
+            if (images.hasOwnProperty(index)) {
+                _domStr += '<div class="item">'
+                _domStr += images[index].parentNode.innerHTML
+                _domStr += '</div>'
+            }
         }
         return _domStr
     }

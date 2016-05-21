@@ -1,8 +1,7 @@
 .waterfall--album {
-    flex: 1;
-    flex-direction: row;
-    justify-content: center;
+    display: block;
     .waterfall--item {
+        float: left;
         flex-direction: column;
     }
 }

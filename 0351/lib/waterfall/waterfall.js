@@ -2,10 +2,6 @@
 import './waterfall.scss'
 import Album from '../albumInterfaces/album'
 
-/**
- * TODO:
- * 
- */
 class Waterfall extends Album {
     constructor(doms, containerDom, line = 2) {
         super()
@@ -20,7 +16,27 @@ class Waterfall extends Album {
     }
 
     append(image) {
-        throw new Error('please implement append method')
+        let falls = this.originContainerDom.querySelectorAll('.waterfall--item')
+        let map = []
+        for (let index in falls) {
+            if (falls.hasOwnProperty(index)) {
+                let height = falls[index].getBoundingClientRect().height
+                map.push({
+                    index,
+                    height
+                })
+            }
+        }
+
+        map.sort((prev, current) => prev.height >= current.height ? 1 : 0)
+        this._appendAction(falls[map[0].index], image)
+    }
+
+    _appendAction(parent, node) {
+        let item = document.createElement('div')
+        item.classList.add('item')
+        item.appendChild(node)
+        parent.appendChild(item)
     }
 
     _images2Array(imageDoms) {
@@ -44,7 +60,6 @@ class Waterfall extends Album {
             html += '<div class="waterfall--item">'
             while(i < itemSize && this.imagesDom.length > 0) {
                 let lastDom = this.imagesDom.pop()
-                console.log(lastDom)
                 html += '<div class="item">'
                 html += lastDom.innerHTML
                 html += '</div>'
@@ -56,20 +71,19 @@ class Waterfall extends Album {
         
         return html
     }
-    
-    _changeWidth() {
-    }
 
     render() {
         let originSize = this.rememberOriginImgSize()
         this.originContainerDom.classList.add('waterfall--album')
+        this.originContainerDom.classList.add('clearfix')
         this.originContainerDom.innerHTML = this._generatDomStr()
         this.resetImagesSize(originSize, 'width')
     }
     
 
     destroy() {
-        this.originContainerDom.classList.remove('waterfall-album')
+        this.originContainerDom.classList.remove('waterfall--album')
+        this.originContainerDom.classList.remove('clearfix')
     }
 }
 
